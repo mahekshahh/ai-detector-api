@@ -46,9 +46,7 @@ print("Image model loaded!")
 
 # ── Load Video Model ─────────────────────────────────────────
 def load_video_model():
-    model_path = def load_image_model():
     model_path = "v2_best_model.h5"
-    
     with h5py.File(model_path, 'r+') as f:
         model_config = json.loads(f.attrs['model_config'])
         def remove_quantization(obj):
@@ -61,8 +59,8 @@ def load_video_model():
                     remove_quantization(item)
         remove_quantization(model_config)
         f.attrs['model_config'] = json.dumps(model_config)
-    
     return tf.keras.models.load_model(model_path, compile=False)
+
 print("Loading video model...")
 video_model = load_video_model()
 print("Video model loaded!")
